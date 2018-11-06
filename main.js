@@ -14,6 +14,20 @@ function writeCode(preFix,code,fn){
   },10)
 }
 
+function writeMarkdown(markdown,fn){
+  let domPaper = document.querySelector('#paper>.content')
+  let n = 0
+  let timer = setInterval(()=>{
+    n += 1
+    domPaper.innerHTML = Prism.highlight(markdown.slice(0,n), Prism.languages.css)
+    domPaper.scrollTop = domPaper.scrollHeight
+    if(n >= markdown.length){
+      window.clearInterval(timer)
+      fn.call()
+    }
+  },10)
+}
+
 var result = `/*
   * 面试官你好，我是xxx
   * 我将以动画的形式介绍我自己
@@ -27,7 +41,7 @@ var result = `/*
 }
 html{
   background: #eee;
-  font-size: 16px;
+  font-size: 14px;
 }
 #code{
   border: 1px solid red;
@@ -55,12 +69,21 @@ html{
   width: 50%;
   height: 100%;
 }
+#paper > .content{
+  background: black;
+  width: 100%;
+  height: 100%;
+}
 #paper{
   position: fixed;
   right: 0;
   width: 50%;
   height: 100%;
   background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
 
 `
@@ -68,30 +91,23 @@ var result2 = `
 #paper{
 }
   `
+var md = ``
 
 writeCode('', result, ()=>{
   createPaper(()=>{
-    writeCode(result, result2)
+    writeCode(result, result2,()=>{
+      writeMarkdown()
+    })
   })
 })
 
 function createPaper(fn){
   var paper = document.createElement('div')
   paper.id = 'paper'
+  var content = document.createElement('div')
+  content.className = 'content'
+  paper.appendChild(content)
   document.body.appendChild(paper)
   fn.call()
 }
 
-function fn3(preResult){
-  
-  var n = 0
-  var timer = setInterval(()=>{
-    n += 1
-    code.innerHTML = preResult + result.slice(0,n)
-    code.innerHTML = Prism.highlight(preResult + result.slice(0,n), Prism.languages.css);
-    styleTag.innerHTML = preResult + result.slice(0,n)
-    if(n >= result.length){
-      window.clearInterval(timer)
-    }
-  },10)
-}
