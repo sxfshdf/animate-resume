@@ -53,16 +53,48 @@ html{
 var result2 = `/*
 * 接下来用一个库 marked.js
 * 把 Markdown 变成 HTML
-*/`
-
-var result3 = `
-/* 再给 HTML 加点样式 */
-.paper .content {
-  margin: 8px;
-}
+*/
 
 `
 
+var result3 = `
+/* 再给 HTML 加点样式 */
+
+.paper .content h2{
+  padding: 8px 0;
+  margin: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.paper .content ol>li,
+.paper .content ul>li{
+  margin: 8px 0;
+}
+
+`
+var md = `
+## 自我介绍
+我叫 XXX ，
+1990 年 1 月出生 ，
+XXX 学校毕业 ，
+自学前端半年 ，
+希望应聘前端开发岗位 。
+
+## 技能介绍
+熟悉 JavaScript CSS
+
+## 项目介绍
+1. [简单轮播](https://sxfshdf.github.io/slide-demo/index.html)
+2. [个人简历](https://sxfshdf.github.io/resume/index.html)
+3. [我的画板](https://sxfshdf.github.io/canvas-demo/index.html)
+
+## 联系方式
+- QQ: 754872493
+- Email: sxf754872493@gmail.com
+- 手机: xxx
+
+## 链接
+[我的文章](https://www.jianshu.com/u/eda06e53689b)
+`
 
 
 writeCode('',result,()=>{
@@ -80,32 +112,7 @@ writeCode('',result,()=>{
 
 
 
-var md = `
-## 自我介绍
 
-我叫 XXX <br>
-1990 年 1 月出生 <br>
-XXX 学校毕业 <br>
-自学前端半年 <br>
-希望应聘前端开发岗位
-
-## 技能介绍
-
-熟悉 JavaScript CSS
-
-## 项目介绍
-
-1. [简单轮播](https://sxfshdf.github.io/slide-demo/index.html)
-2. [个人简历](https://sxfshdf.github.io/resume/index.html)
-3. [我的画板](https://sxfshdf.github.io/canvas-demo/index.html)
-
-## 联系方式
-
-- QQ xxxxxxxx
-- Email xxxxxxxx
-- 手机 xxxxxxx
-
-`
 function writeMarkdown(markdown,fn){
   let domPaper = document.querySelector('#paper > .content')
   let n = 0
@@ -117,7 +124,7 @@ function writeMarkdown(markdown,fn){
       window.clearInterval(timer)
       fn && fn.call()
     }
-  },10)
+  },50)
 }
 
 function createPaper(fn){
@@ -143,7 +150,7 @@ function writeCode(preCode,code,fn){
       window.clearInterval(timer)
       fn && fn.call()
     }
-  },10)
+  },50)
 }
 
 function convertMarkdownToHtml(fn){

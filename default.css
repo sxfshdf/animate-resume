@@ -22,7 +22,7 @@ ol,ul,li{
   overflow: auto; 
 }
 .content{
-  padding: 24px;
+  padding: 32px;
   color: black;
 }
 .paper>.html-body{
