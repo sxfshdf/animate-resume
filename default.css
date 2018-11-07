@@ -3,16 +3,30 @@
 html{
   font-size: 14px;
 }
-.token.selector{
-  color: black;
+
+ol,ul,li{
+  list-style-position: inside;
 }
-.token.property{
-  color: black;
-}
-.token.punctuation {
-  color: black;
-}
+.token.comment,
+.token.selector,
+.token.property,
+.token.punctuation,
+.token.function{ color: inherit;}
+
 #code{
   height: 100vh;
+  overflow: auto;
+}
+
+.paper{
+  overflow: auto; 
+}
+.content{
+  padding: 24px;
+  color: black;
+}
+.paper>.html-body{
+  color: black;
+  padding: 16px;
   overflow: auto;
 }
